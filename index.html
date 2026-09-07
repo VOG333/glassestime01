@@ -442,10 +442,6 @@
             color: var(--gold-light);
             margin-bottom: 12px;
         }
-        .product-card .card-body .product-price.out-of-stock {
-            color: #ff6b6b;
-            font-weight: 600;
-        }
         .product-card .card-body .btn-detail {
             padding: 8px 0;
             border-radius: 30px;
@@ -588,9 +584,6 @@
             font-weight: 700;
             color: var(--gold-light);
             margin-bottom: 12px;
-        }
-        .modal-body .modal-price.out-of-stock {
-            color: #ff6b6b;
         }
         .modal-body .modal-desc {
             color: var(--text-secondary);
@@ -771,36 +764,6 @@
             background: rgba(200, 60, 60, 0.35);
         }
 
-        /* чекбокс */
-        .admin-form .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-        .admin-form .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--gold);
-            margin: 0;
-            cursor: pointer;
-        }
-        .admin-form .checkbox-group label {
-            margin: 0;
-            cursor: pointer;
-        }
-
-        /* превью изображения в админке */
-        .admin-form .preview-img {
-            max-width: 100%;
-            max-height: 150px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-top: 6px;
-            border: 1px solid var(--glass-border);
-            background: #0c0b0a;
-        }
-
         .admin-list {
             display: flex;
             flex-direction: column;
@@ -830,10 +793,6 @@
             border-radius: 20px;
             background: rgba(212, 168, 83, 0.15);
             color: var(--gold-light);
-        }
-        .admin-list .list-item .item-info .badge.out {
-            background: rgba(255, 100, 100, 0.15);
-            color: #ff6b6b;
         }
         .admin-list .list-item .item-actions {
             display: flex;
@@ -1057,12 +1016,13 @@
 
                 <!-- Блок-картинка с часами -->
                 <div class="hero-image-block" id="heroImageBlock">
+                    <!-- Сюда вставьте свою картинку: замените src на URL вашего изображения -->
                     <img id="mainHeroImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%232a2520'/%3E%3Ctext x='400' y='210' font-family='Inter, sans-serif' font-size='28' fill='%23d4a853' text-anchor='middle'%3E⌚ ВАШИ ЧАСЫ%3C/text%3E%3Ctext x='400' y='260' font-family='Inter, sans-serif' font-size='16' fill='%23807870' text-anchor='middle'%3E(замените это фото в админ-панели)%3C/text%3E%3C/svg%3E"
                          alt="GlassesTime01 Hero" />
 
                     <div class="hero-overlay">
                         <button class="btn-catalog" onclick="navigateTo('catalog')">
-                            Каталог <i class="fas fa-arrow-right"></i>
+                            Каталог <i class="fas fa-arrow-right"></I>
                         </button>
                     </div>
                 </div>
@@ -1071,17 +1031,17 @@
                 <div class="contact-bar">
                     <!-- Телефон -->
                     <div class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone-alt"></I>
                         <a href="tel:+79615003337" class="phone-text">+7 (961) 500-333-7</a>
                     </div>
                     <!-- Telegram -->
                     <div class="contact-item">
-                        <i class="fab fa-telegram-plane"></i>
+                        <i class="fab fa-telegram-plane"></I>
                         <a href="https://t.me/glassestime01" target="_blank">@glassestime01</a>
                     </div>
                     <!-- WhatsApp -->
                     <div class="contact-item">
-                        <i class="fab fa-whatsapp"></i>
+                        <i class="fab fa-whatsapp"></I>
                         <a href="https://wa.me/79233335333" target="_blank">+7 (923) 333-53-33</a>
                     </div>
                 </div>
@@ -1135,13 +1095,10 @@
                         <label>Название сайта</label>
                         <input type="text" id="adminSiteTitle" value="GlassesTime01" />
 
-                        <label>Главное изображение</label>
-                        <input type="file" id="adminHeroFile" accept="image/*" />
-                        <div id="heroPreviewContainer" style="margin-top:6px; display:none;">
-                            <img id="heroPreview" class="preview-img" src="" alt="Превью" />
-                        </div>
-                        <small style="color:var(--text-secondary); display:block; margin-top:4px; margin-bottom:12px;">
-                            Загрузите изображение для главного блока. Оно автоматически подстроится под размеры.
+                        <label>Главное изображение (URL)</label>
+                        <input type="text" id="adminHeroImage" placeholder="https://example.com/image.jpg" />
+                        <small style="color:var(--text-secondary); display:block; margin-top:-8px; margin-bottom:12px;">
+                            Вставьте прямую ссылку на ваше изображение (часы)
                         </small>
 
                         <label>Контактный телефон</label>
@@ -1173,8 +1130,8 @@
 
                 <!-- Секция: Товары -->
                 <div class="admin-section" id="adminProducts">
-                    <div class="admin-form" id="productForm">
-                        <h3 style="margin-bottom:12px; font-weight:600;" id="productFormTitle">Добавить товар</h3>
+                    <div class="admin-form">
+                        <h3 style="margin-bottom:12px; font-weight:600;">Добавить товар</h3>
                         <div class="form-row">
                             <div>
                                 <label>Название товара</label>
@@ -1189,26 +1146,12 @@
                         <select id="adminProductCategory">
                             <!-- Заполняется JS -->
                         </select>
-
-                        <label>Фото товара</label>
-                        <input type="file" id="adminProductFile" accept="image/*" />
-                        <div id="productPreviewContainer" style="margin-top:6px; display:none;">
-                            <img id="productPreview" class="preview-img" src="" alt="Превью товара" />
-                        </div>
-                        <small style="color:var(--text-secondary); display:block; margin-top:4px; margin-bottom:12px;">
-                            Загрузите фото. Если не выбрано, останется текущее (при редактировании).
-                        </small>
-
+                        <label>Фото (URL)</label>
+                        <input type="text" id="adminProductImage" placeholder="https://example.com/photo.jpg" />
                         <label>Описание</label>
                         <textarea id="adminProductDesc" placeholder="Краткое описание товара..." rows="3"></textarea>
 
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="adminProductOutOfStock" />
-                            <label for="adminProductOutOfStock">Нет в наличии</label>
-                        </div>
-
-                        <button class="btn-submit" id="productSubmitBtn" onclick="saveProduct()"><i class="fas fa-plus"></i> Добавить товар</button>
-                        <button class="btn-danger" id="productCancelBtn" onclick="cancelEditProduct()" style="display:none; margin-left:10px;">Отмена</button>
+                        <button class="btn-submit" onclick="addProduct()"><i class="fas fa-plus"></i> Добавить товар</button>
                     </div>
                     <div class="admin-list" id="adminProductList">
                         <!-- Заполняется JS -->
@@ -1249,6 +1192,9 @@
         // ================================================================
         // 1. КОНФИГУРАЦИЯ
         // ================================================================
+        // ID пользователя @A333MC в Telegram.
+        // Чтобы узнать свой ID, напишите боту @userinfobot в Telegram.
+        // Замените 0 на реальный ID.
         const ADMIN_TG_ID = 833607467; // <-- СЮДА ВСТАВЬТЕ ID ПОЛЬЗОВАТЕЛЯ @A333MC
 
         // ================================================================
@@ -1266,21 +1212,32 @@
                 if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                     tgUser = tg.initDataUnsafe.user;
                 }
+                // Показываем кнопку "Назад" если нужно
             }
         } catch (e) {
             console.log('Telegram WebApp не обнаружен, работа в браузере.');
         }
 
+        // Проверяем, является ли текущий пользователь админом
         function isAdmin() {
-            if (tgUser && tgUser.id === ADMIN_TG_ID) return true;
-            if (ADMIN_TG_ID === 833607467) return true; // для теста
+            if (tgUser && tgUser.id === ADMIN_TG_ID) {
+                return true;
+            }
+            // Для локального тестирования: если ADMIN_TG_ID === 0, считаем админом
+            if (ADMIN_TG_ID === 833607467) {
+                // В браузере или если ID не задан — показываем админку через специальный флаг
+                // Но для безопасности оставляем только в режиме разработки
+                return true;
+            }
             return false;
         }
 
+        // Показываем кнопку админки, если пользователь админ
         document.addEventListener('DOMContentLoaded', function() {
             if (isAdmin()) {
                 document.getElementById('navAdmin').style.display = 'inline-flex';
             }
+            // Если админ ID не задан, но мы в браузере — показываем для удобства
             if (ADMIN_TG_ID === 833607467 && !isTelegram) {
                 document.getElementById('navAdmin').style.display = 'inline-flex';
             }
@@ -1300,6 +1257,8 @@
             set(key, value) {
                 localStorage.setItem('gt_' + key, JSON.stringify(value));
             },
+
+            // --- Настройки ---
             getSettings() {
                 return this.get('settings', {
                     siteTitle: 'GlassesTime01',
@@ -1310,6 +1269,8 @@
                 });
             },
             setSettings(s) { this.set('settings', s); },
+
+            // --- Категории ---
             getCategories() {
                 return this.get('categories', [
                     { id: 1, name: 'Солнцезащитные очки' },
@@ -1318,10 +1279,14 @@
                 ]);
             },
             setCategories(c) { this.set('categories', c); },
+
+            // --- Товары ---
             getProducts() {
                 return this.get('products', []);
             },
             setProducts(p) { this.set('products', p); },
+
+            // --- Следующий ID для категорий ---
             nextCategoryId() {
                 const cats = this.getCategories();
                 const max = cats.reduce((a, c) => Math.max(a, c.id || 0), 0);
@@ -1339,11 +1304,10 @@
         // ================================================================
         let state = {
             currentPage: 'main',
-            currentCategoryId: null,
+            currentCategoryId: null, // null = все товары
             currentPageNum: 1,
-            productsPerPage: 15,
+            productsPerPage: 15, // 3x5
             modalProductId: null,
-            editingProductId: null, // для редактирования товара
         };
 
         // ================================================================
@@ -1366,6 +1330,13 @@
             return DB.getCategories().find(c => c.id === id) || null;
         }
 
+        function getProductsByCategory(categoryId) {
+            const all = DB.getProducts();
+            if (categoryId === null || categoryId === undefined) return all;
+            return all.filter(p => p.categoryId === categoryId);
+        }
+
+        // Форматирование цены
         function formatPrice(price) {
             return price || '0 ₽';
         }
@@ -1374,11 +1345,16 @@
         // 6. НАВИГАЦИЯ
         // ================================================================
         function navigateTo(page, data) {
+            // Скрываем все страницы
             document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
-            const target = document.getElementById('page-' + page);
-            if (target) target.classList.add('active');
-            state.currentPage = page;
 
+            const target = document.getElementById('page-' + page);
+            if (target) {
+                target.classList.add('active');
+                state.currentPage = page;
+            }
+
+            // Рендерим контент
             if (page === 'catalog') {
                 renderCatalog(state.currentCategoryId, state.currentPageNum);
             } else if (page === 'admin') {
@@ -1386,6 +1362,8 @@
             } else if (page === 'main') {
                 renderMain();
             }
+
+            // Прокрутка вверх
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1394,14 +1372,18 @@
         // ================================================================
         function renderMain() {
             const settings = DB.getSettings();
+            // Обновляем заголовок
             document.querySelector('.logo').textContent = '⌚ ' + settings.siteTitle;
+            // Обновляем картинку
             const img = document.getElementById('mainHeroImg');
             if (settings.heroImage && settings.heroImage.trim() !== '') {
                 img.src = settings.heroImage;
             } else {
+                // плейсхолдер
                 img.src =
                     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%232a2520'/%3E%3Ctext x='400' y='210' font-family='Inter, sans-serif' font-size='28' fill='%23d4a853' text-anchor='middle'%3E⌚ ВАШИ ЧАСЫ%3C/text%3E%3Ctext x='400' y='260' font-family='Inter, sans-serif' font-size='16' fill='%23807870' text-anchor='middle'%3E(замените это фото в админ-панели)%3C/text%3E%3C/svg%3E";
             }
+            // Обновляем контакты
             const phoneLink = document.querySelector('.contact-item a[href^="tel:"]');
             if (phoneLink) {
                 phoneLink.href = 'tel:' + settings.phone.replace(/[^0-9+]/g, '');
@@ -1421,38 +1403,16 @@
         }
 
         // ================================================================
-        // 8. РЕНДЕР: КАТАЛОГ (с сортировкой по наличию)
+        // 8. РЕНДЕР: КАТАЛОГ
         // ================================================================
         function renderCatalog(categoryId, pageNum) {
-            state.currentCategoryId = (categoryId !== undefined) ? categoryId : state.currentCategoryId;
+            state.currentCategoryId = categoryId !== undefined ? categoryId : state.currentCategoryId;
             state.currentPageNum = pageNum || state.currentPageNum || 1;
 
             const categories = DB.getCategories();
-            let allProducts = DB.getProducts();
+            const allProducts = DB.getProducts();
 
-            // Сортировка: сначала в наличии, потом нет в наличии
-            allProducts.sort((a, b) => {
-                if (a.outOfStock && !b.outOfStock) return 1;
-                if (!a.outOfStock && b.outOfStock) return -1;
-                return 0;
-            });
-
-            // Фильтр по категории
-            let filtered = allProducts;
-            if (state.currentCategoryId !== null) {
-                filtered = allProducts.filter(p => p.categoryId === state.currentCategoryId);
-            }
-
-            // Пагинация
-            const total = filtered.length;
-            const perPage = state.productsPerPage;
-            const totalPages = Math.max(1, Math.ceil(total / perPage));
-            if (state.currentPageNum > totalPages) state.currentPageNum = totalPages;
-            const start = (state.currentPageNum - 1) * perPage;
-            const end = Math.min(start + perPage, total);
-            const pageProducts = filtered.slice(start, end);
-
-            // Рендер вкладок
+            // --- Рендер вкладок ---
             const tabsContainer = document.getElementById('categoryTabs');
             let tabsHtml = `<button class="tab-btn ${state.currentCategoryId === null ? 'active' : ''}" data-cat="all">Все товары</button>`;
             categories.forEach(c => {
@@ -1460,6 +1420,8 @@
                 tabsHtml += `<button class="tab-btn ${active}" data-cat="${c.id}">${c.name}</button>`;
             });
             tabsContainer.innerHTML = tabsHtml;
+
+            // Обработчики вкладок
             tabsContainer.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const catId = this.dataset.cat === 'all' ? null : Number(this.dataset.cat);
@@ -1469,12 +1431,27 @@
                 });
             });
 
-            // Рендер сетки
+            // --- Фильтруем товары ---
+            let filtered = allProducts;
+            if (state.currentCategoryId !== null) {
+                filtered = allProducts.filter(p => p.categoryId === state.currentCategoryId);
+            }
+
+            // --- Пагинация ---
+            const total = filtered.length;
+            const perPage = state.productsPerPage;
+            const totalPages = Math.max(1, Math.ceil(total / perPage));
+            if (state.currentPageNum > totalPages) state.currentPageNum = totalPages;
+            const start = (state.currentPageNum - 1) * perPage;
+            const end = Math.min(start + perPage, total);
+            const pageProducts = filtered.slice(start, end);
+
+            // --- Рендер сетки ---
             const grid = document.getElementById('productGrid');
             if (pageProducts.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state" style="grid-column:1/-1;">
-                        <i class="fas fa-box-open"></i>
+                        <i class="fas fa-box-open"></I>
                         <p>В этой категории пока нет товаров</p>
                     </div>
                 `;
@@ -1483,9 +1460,6 @@
                 pageProducts.forEach(p => {
                     const imgSrc = p.image && p.image.trim() !== '' ? p.image :
                         'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"%3E%3Crect width="300" height="300" fill="%231a1715"/%3E%3Ctext x="150" y="160" font-family="Inter" font-size="40" fill="%234a4540" text-anchor="middle"%3E🕶%3C/text%3E%3C/svg%3E';
-                    const priceHtml = p.outOfStock ?
-                        `<div class="product-price out-of-stock">Нет в наличии</div>` :
-                        `<div class="product-price">${formatPrice(p.price)}</div>`;
                     gridHtml += `
                         <div class="product-card" data-id="${p.id}">
                             <div class="card-img">
@@ -1493,7 +1467,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="product-name">${p.name || 'Без названия'}</div>
-                                ${priceHtml}
+                                <div class="product-price">${formatPrice(p.price)}</div>
                                 <button class="btn-detail" onclick="openProductModal(${p.id})">Подробнее</button>
                             </div>
                         </div>
@@ -1502,12 +1476,14 @@
                 grid.innerHTML = gridHtml;
             }
 
-            // Пагинация
+            // --- Рендер пагинации ---
             const pag = document.getElementById('pagination');
             let pagHtml = '';
+            // Предыдущая
             const prevDisabled = state.currentPageNum <= 1;
             pagHtml += `<button class="page-num ${prevDisabled ? 'disabled' : ''}" onclick="goToPage(${state.currentPageNum - 1})"><i class="fas fa-chevron-left"></i></button>`;
 
+            // Номера страниц (показываем максимум 7)
             let pages = [];
             if (totalPages <= 7) {
                 for (let i = 1; i <= totalPages; i++) pages.push(i);
@@ -1520,6 +1496,7 @@
                 if (endPage < totalPages - 1) pages.push('...');
                 pages.push(totalPages);
             }
+
             pages.forEach(p => {
                 if (p === '...') {
                     pagHtml += `<span class="page-num" style="background:transparent; pointer-events:none;">…</span>`;
@@ -1529,14 +1506,15 @@
                 }
             });
 
+            // Следующая
             const nextDisabled = state.currentPageNum >= totalPages;
             pagHtml += `<button class="page-num ${nextDisabled ? 'disabled' : ''}" onclick="goToPage(${state.currentPageNum + 1})"><i class="fas fa-chevron-right"></i></button>`;
+
             pag.innerHTML = pagHtml;
         }
 
         function goToPage(page) {
-            const total = DB.getProducts().filter(p => state.currentCategoryId === null || p.categoryId === state
-                .currentCategoryId).length;
+            const total = getProductsByCategory(state.currentCategoryId).length;
             const totalPages = Math.max(1, Math.ceil(total / state.productsPerPage));
             if (page < 1 || page > totalPages) return;
             state.currentPageNum = page;
@@ -1548,19 +1526,15 @@
         // ================================================================
         function openProductModal(productId) {
             const product = getProductById(productId);
-            if (!product) { showToast('Товар не найден', 'fa-exclamation-circle'); return; }
+            if (!product) {
+                showToast('Товар не найден', 'fa-exclamation-circle');
+                return;
+            }
             state.modalProductId = productId;
 
             const modal = document.getElementById('productModal');
             document.getElementById('modalTitle').textContent = product.name || 'Без названия';
-            const priceEl = document.getElementById('modalPrice');
-            if (product.outOfStock) {
-                priceEl.textContent = 'Нет в наличии';
-                priceEl.className = 'modal-price out-of-stock';
-            } else {
-                priceEl.textContent = formatPrice(product.price);
-                priceEl.className = 'modal-price';
-            }
+            document.getElementById('modalPrice').textContent = formatPrice(product.price);
             document.getElementById('modalDesc').textContent = product.description || 'Описание отсутствует';
 
             const imgEl = document.getElementById('modalImg');
@@ -1574,9 +1548,13 @@
                 placeholder.style.display = 'flex';
             }
 
+            // Кнопка заказа
             const orderBtn = document.getElementById('modalOrderBtn');
+            // Сохраняем ID товара для обработчика
             orderBtn.dataset.productId = productId;
-            orderBtn.onclick = function() { orderProduct(productId); };
+            orderBtn.onclick = function() {
+                orderProduct(productId);
+            };
 
             modal.classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -1586,48 +1564,65 @@
             document.getElementById('productModal').classList.remove('open');
             document.body.style.overflow = '';
         }
+
+        // Закрытие по клику на фон
         document.getElementById('productModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
+
+        // Закрытие по Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeModal();
         });
 
+        // ================================================================
+        // 10. ЗАКАЗ
+        // ================================================================
         function orderProduct(productId) {
             const product = getProductById(productId);
-            if (!product) { showToast('Товар не найден', 'fa-exclamation-circle'); return; }
+            if (!product) {
+                showToast('Товар не найден', 'fa-exclamation-circle');
+                return;
+            }
+
+            // Ссылка на товар (текущий URL + якорь или просто ссылка на сайт)
             const productLink = window.location.href.split('?')[0] + '?product=' + productId;
+
             const message =
-                `Здравствуйте, понравился ваш товар! Хочу сделать заказ.%0A%0A📦 Товар: ${product.name || 'Без названия'}%0A💰 ${product.outOfStock ? 'Нет в наличии' : 'Цена: ' + formatPrice(product.price)}%0A🔗 Ссылка: ${productLink}`;
-            window.open(`https://t.me/A333MC?text=${message}`, '_blank');
+                `Здравствуйте, понравился ваш товар! Хочу сделать заказ.%0A%0A📦 Товар: ${product.name || 'Без названия'}%0A💰 Цена: ${formatPrice(product.price)}%0A🔗 Ссылка: ${productLink}`;
+
+            // Открываем чат с @A333MC
+            const chatUrl = `https://t.me/A333MC?text=${message}`;
+            window.open(chatUrl, '_blank');
+
             closeModal();
             showToast('Переход в чат с продавцом', 'fa-paper-plane');
         }
 
         // ================================================================
-        // 10. АДМИН ПАНЕЛЬ
+        // 11. АДМИН ПАНЕЛЬ
         // ================================================================
+        let adminEditingCategoryId = null;
+        let adminEditingProductId = null;
+
         function renderAdmin() {
-            if (!isAdmin()) { showToast('Доступ запрещён', 'fa-lock');
-                navigateTo('main'); return; }
+            if (!isAdmin()) {
+                showToast('Доступ запрещён', 'fa-lock');
+                navigateTo('main');
+                return;
+            }
+            // Загружаем данные в формы
             const settings = DB.getSettings();
             document.getElementById('adminSiteTitle').value = settings.siteTitle || 'GlassesTime01';
+            document.getElementById('adminHeroImage').value = settings.heroImage || '';
             document.getElementById('adminPhone').value = settings.phone || '+7(961)500-333-7';
             document.getElementById('adminTelegram').value = settings.telegram || 'https://t.me/glassestime01';
             document.getElementById('adminWhatsapp').value = settings.whatsapp || '+7(923)333-53-33';
-            // Превью героя
-            const heroPreviewContainer = document.getElementById('heroPreviewContainer');
-            const heroPreview = document.getElementById('heroPreview');
-            if (settings.heroImage && settings.heroImage.trim() !== '') {
-                heroPreview.src = settings.heroImage;
-                heroPreviewContainer.style.display = 'block';
-            } else {
-                heroPreviewContainer.style.display = 'none';
-            }
 
             renderAdminCategories();
             renderAdminProducts();
 
+            // Вкладки админки
             document.querySelectorAll('.admin-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
                     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -1640,11 +1635,14 @@
             });
         }
 
-        // --- Категории ---
+        // --- Категории в админке ---
         function renderAdminCategories() {
             const cats = DB.getCategories();
             const list = document.getElementById('adminCategoryList');
-            if (cats.length === 0) { list.innerHTML = `<div class="empty-state"><p>Нет категорий</p></div>`; return; }
+            if (cats.length === 0) {
+                list.innerHTML = `<div class="empty-state"><p>Нет категорий</p></div>`;
+                return;
+            }
             let html = '';
             cats.forEach(c => {
                 const prodCount = DB.getProducts().filter(p => p.categoryId === c.id).length;
@@ -1668,11 +1666,14 @@
             const input = document.getElementById('adminNewCategory');
             const name = input.value.trim();
             if (!name) { showToast('Введите название категории', 'fa-exclamation-circle'); return; }
+
             const cats = DB.getCategories();
-            cats.push({ id: DB.nextCategoryId(), name });
+            const newCat = { id: DB.nextCategoryId(), name };
+            cats.push(newCat);
             DB.setCategories(cats);
             input.value = '';
             renderAdminCategories();
+            // Обновляем селект товаров
             populateCategorySelect();
             showToast('Категория добавлена');
         }
@@ -1687,6 +1688,7 @@
                 DB.setCategories(cats);
                 renderAdminCategories();
                 populateCategorySelect();
+                // Перерендерим каталог, если он открыт
                 if (state.currentPage === 'catalog') renderCatalog(state.currentCategoryId, state.currentPageNum);
                 showToast('Категория обновлена');
             }
@@ -1697,16 +1699,19 @@
             let cats = DB.getCategories();
             cats = cats.filter(c => c.id !== id);
             DB.setCategories(cats);
+
+            // Удаляем товары этой категории
             let prods = DB.getProducts();
             prods = prods.filter(p => p.categoryId !== id);
             DB.setProducts(prods);
+
             renderAdminCategories();
             populateCategorySelect();
             if (state.currentPage === 'catalog') renderCatalog(state.currentCategoryId, state.currentPageNum);
             showToast('Категория удалена');
         }
 
-        // --- Товары ---
+        // --- Товары в админке ---
         function populateCategorySelect() {
             const select = document.getElementById('adminProductCategory');
             const cats = DB.getCategories();
@@ -1725,19 +1730,21 @@
             const prods = DB.getProducts();
             const list = document.getElementById('adminProductList');
             populateCategorySelect();
-            if (prods.length === 0) { list.innerHTML = `<div class="empty-state"><p>Нет товаров</p></div>`; return; }
+
+            if (prods.length === 0) {
+                list.innerHTML = `<div class="empty-state"><p>Нет товаров</p></div>`;
+                return;
+            }
             let html = '';
             prods.forEach(p => {
                 const cat = getCategoryById(p.categoryId);
                 const catName = cat ? cat.name : 'Без категории';
-                const outBadge = p.outOfStock ? '<span class="badge out">Нет в наличии</span>' : '';
                 html += `
                     <div class="list-item" data-id="${p.id}">
                         <div class="item-info">
                             <strong>${p.name || 'Без названия'}</strong>
                             <span class="badge">${catName}</span>
-                            ${outBadge}
-                            <span class="badge" style="background:rgba(212,168,83,0.12);">${p.outOfStock ? '—' : formatPrice(p.price)}</span>
+                            <span class="badge" style="background:rgba(212,168,83,0.12);">${formatPrice(p.price)}</span>
                         </div>
                         <div class="item-actions">
                             <button class="edit-btn" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i> Правка</button>
@@ -1749,112 +1756,64 @@
             list.innerHTML = html;
         }
 
-        // Редактирование: заполняем форму
-        function editProduct(id) {
-            const prod = getProductById(id);
-            if (!prod) return;
-            state.editingProductId = id;
-            document.getElementById('productFormTitle').textContent = 'Редактировать товар';
-            document.getElementById('adminProductName').value = prod.name || '';
-            document.getElementById('adminProductPrice').value = prod.price || '';
-            document.getElementById('adminProductCategory').value = prod.categoryId || '';
-            document.getElementById('adminProductDesc').value = prod.description || '';
-            document.getElementById('adminProductOutOfStock').checked = !!prod.outOfStock;
-
-            // Превью товара
-            const previewContainer = document.getElementById('productPreviewContainer');
-            const preview = document.getElementById('productPreview');
-            if (prod.image && prod.image.trim() !== '') {
-                preview.src = prod.image;
-                previewContainer.style.display = 'block';
-            } else {
-                previewContainer.style.display = 'none';
-            }
-            // Очищаем поле файла (чтобы не было конфликтов)
-            document.getElementById('adminProductFile').value = '';
-
-            document.getElementById('productSubmitBtn').innerHTML = '<i class="fas fa-save"></i> Сохранить';
-            document.getElementById('productCancelBtn').style.display = 'inline-block';
-        }
-
-        function cancelEditProduct() {
-            state.editingProductId = null;
-            document.getElementById('productFormTitle').textContent = 'Добавить товар';
-            document.getElementById('adminProductName').value = '';
-            document.getElementById('adminProductPrice').value = '';
-            document.getElementById('adminProductCategory').value = '';
-            document.getElementById('adminProductDesc').value = '';
-            document.getElementById('adminProductOutOfStock').checked = false;
-            document.getElementById('adminProductFile').value = '';
-            document.getElementById('productPreviewContainer').style.display = 'none';
-            document.getElementById('productSubmitBtn').innerHTML = '<i class="fas fa-plus"></i> Добавить товар';
-            document.getElementById('productCancelBtn').style.display = 'none';
-            state.editingProductId = null;
-        }
-
-        // Сохранение (добавление или обновление)
-        function saveProduct() {
+        function addProduct() {
             const name = document.getElementById('adminProductName').value.trim();
             const price = document.getElementById('adminProductPrice').value.trim();
             const categoryId = Number(document.getElementById('adminProductCategory').value);
+            const image = document.getElementById('adminProductImage').value.trim();
             const description = document.getElementById('adminProductDesc').value.trim();
-            const outOfStock = document.getElementById('adminProductOutOfStock').checked;
 
             if (!name) { showToast('Введите название товара', 'fa-exclamation-circle'); return; }
             if (!categoryId) { showToast('Выберите категорию', 'fa-exclamation-circle'); return; }
 
-            // Обработка файла
-            const fileInput = document.getElementById('adminProductFile');
-            let imageData = null;
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imageData = e.target.result;
-                    saveProductData(name, price, categoryId, description, outOfStock, imageData);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                // Если файл не выбран, сохраняем без изменения изображения (при редактировании)
-                saveProductData(name, price, categoryId, description, outOfStock, null);
-            }
-        }
+            const prods = DB.getProducts();
+            const newProd = {
+                id: DB.nextProductId(),
+                name,
+                price: price || '0 ₽',
+                categoryId,
+                image: image || '',
+                description: description || ''
+            };
+            prods.push(newProd);
+            DB.setProducts(prods);
 
-        function saveProductData(name, price, categoryId, description, outOfStock, imageData) {
-            let prods = DB.getProducts();
-            if (state.editingProductId !== null) {
-                // Редактирование
-                const index = prods.findIndex(p => p.id === state.editingProductId);
-                if (index === -1) { showToast('Товар не найден', 'fa-exclamation-circle'); return; }
-                const prod = prods[index];
-                prod.name = name;
-                prod.price = price;
-                prod.categoryId = categoryId;
-                prod.description = description;
-                prod.outOfStock = outOfStock;
-                if (imageData) prod.image = imageData;
-                // если не загружено новое фото, оставляем старое
-                DB.setProducts(prods);
-                showToast('Товар обновлён');
-            } else {
-                // Добавление
-                const newProd = {
-                    id: DB.nextProductId(),
-                    name,
-                    price: price || '0 ₽',
-                    categoryId,
-                    description: description || '',
-                    outOfStock: outOfStock || false,
-                    image: imageData || ''
-                };
-                prods.push(newProd);
-                DB.setProducts(prods);
-                showToast('Товар добавлен');
-            }
+            // Очищаем форму
+            document.getElementById('adminProductName').value = '';
+            document.getElementById('adminProductPrice').value = '';
+            document.getElementById('adminProductImage').value = '';
+            document.getElementById('adminProductDesc').value = '';
 
-            // Очистка формы
-            cancelEditProduct();
             renderAdminProducts();
             if (state.currentPage === 'catalog') renderCatalog(state.currentCategoryId, state.currentPageNum);
+            showToast('Товар добавлен');
+        }
+
+        function editProduct(id) {
+            const prods = DB.getProducts();
+            const prod = prods.find(p => p.id === id);
+            if (!prod) return;
+
+            const newName = prompt('Название товара:', prod.name) || prod.name;
+            const newPrice = prompt('Цена:', prod.price) || prod.price;
+            const newImage = prompt('URL фото:', prod.image) || prod.image;
+            const newDesc = prompt('Описание:', prod.description) || prod.description;
+
+            const cats = DB.getCategories();
+            const catNames = cats.map(c => c.id + ':' + c.name).join('\n');
+            const catInput = prompt(`ID категории (текущий: ${prod.categoryId}):\n${catNames}`, prod.categoryId);
+            const newCatId = Number(catInput) || prod.categoryId;
+
+            prod.name = newName.trim() || prod.name;
+            prod.price = newPrice.trim() || prod.price;
+            prod.image = newImage.trim() || prod.image;
+            prod.description = newDesc.trim() || prod.description;
+            prod.categoryId = newCatId;
+
+            DB.setProducts(prods);
+            renderAdminProducts();
+            if (state.currentPage === 'catalog') renderCatalog(state.currentCategoryId, state.currentPageNum);
+            showToast('Товар обновлён');
         }
 
         function deleteProduct(id) {
@@ -1871,300 +1830,108 @@
         function saveSettings() {
             const settings = {
                 siteTitle: document.getElementById('adminSiteTitle').value.trim() || 'GlassesTime01',
-                heroImage: document.getElementById('heroPreview').src || '',
+                heroImage: document.getElementById('adminHeroImage').value.trim(),
                 phone: document.getElementById('adminPhone').value.trim() || '+7(961)500-333-7',
                 telegram: document.getElementById('adminTelegram').value.trim() || 'https://t.me/glassestime01',
                 whatsapp: document.getElementById('adminWhatsapp').value.trim() || '+7(923)333-53-33'
             };
-            // Если выбран новый файл, читаем его
-            const fileInput = document.getElementById('adminHeroFile');
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    settings.heroImage = e.target.result;
-                    DB.setSettings(settings);
-                    renderMain();
-                    document.querySelector('.logo').textContent = '⌚ ' + settings.siteTitle;
-                    // обновляем превью
-                    document.getElementById('heroPreview').src = settings.heroImage;
-                    document.getElementById('heroPreviewContainer').style.display = 'block';
-                    showToast('Настройки сохранены');
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                DB.setSettings(settings);
-                renderMain();
-                document.querySelector('.logo').textContent = '⌚ ' + settings.siteTitle;
-                showToast('Настройки сохранены');
-            }
+            DB.setSettings(settings);
+            renderMain();
+            // Обновляем логотип
+            document.querySelector('.logo').textContent = '⌚ ' + settings.siteTitle;
+            showToast('Настройки сохранены');
         }
 
-        // Превью при выборе файла для героя
-        document.getElementById('adminHeroFile').addEventListener('change', function(e) {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    document.getElementById('heroPreview').src = ev.target.result;
-                    document.getElementById('heroPreviewContainer').style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                document.getElementById('heroPreviewContainer').style.display = 'none';
-            }
-        });
-
-        // Превью при выборе файла для товара
-        document.getElementById('adminProductFile').addEventListener('change', function(e) {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    document.getElementById('productPreview').src = ev.target.result;
-                    document.getElementById('productPreviewContainer').style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                document.getElementById('productPreviewContainer').style.display = 'none';
-            }
-        });
-
         // ================================================================
-        // 11. ИНИЦИАЛИЗАЦИЯ
+        // 12. ИНИЦИАЛИЗАЦИЯ
         // ================================================================
         function initApp() {
             renderMain();
+
+            // Если админ ID не задан, но мы в браузере — показываем кнопку админки
             if (ADMIN_TG_ID === 833607467 && !isTelegram) {
                 document.getElementById('navAdmin').style.display = 'inline-flex';
             }
+
+            // Обработка параметра ?product= в URL для прямого открытия модалки
             const params = new URLSearchParams(window.location.search);
             const productId = params.get('product');
             if (productId) {
-                setTimeout(() => openProductModal(Number(productId)), 400);
+                setTimeout(() => {
+                    openProductModal(Number(productId));
+                }, 400);
             }
+
+            // Если открыто в Telegram, скрываем лишнее
+            if (isTelegram) {
+                // Небольшая адаптация
+            }
+
             console.log('✅ GlassesTime01 загружен');
+            console.log('📌 Админ ID:', ADMIN_TG_ID);
+            console.log('👤 Текущий пользователь:', tgUser);
         }
 
         // ================================================================
-        // 12. ОБРАБОТЧИКИ НАВИГАЦИИ
+        // 13. ОБРАБОТЧИКИ ДЛЯ КНОПОК НАВИГАЦИИ
         // ================================================================
-        document.getElementById('navHome').addEventListener('click', function() { navigateTo('main'); });
-        document.getElementById('navCatalog').addEventListener('click', function() { navigateTo('catalog'); });
-        document.getElementById('navAdmin').addEventListener('click', function() { navigateTo('admin'); });
+        // Кнопка "На главную" в хедере уже есть
+        // Кнопка "Каталог" в хедере уже есть
 
-        // Обработка истории
-        window.addEventListener('popstate', function(e) {
-            if (e.state && e.state.page) navigateTo(e.state.page);
+        // Обработчик для кнопки "На главную" (вторая в хедере)
+        document.getElementById('navHome').addEventListener('click', function() {
+            navigateTo('main');
         });
+
+        document.getElementById('navCatalog').addEventListener('click', function() {
+            navigateTo('catalog');
+        });
+
+        document.getElementById('navAdmin').addEventListener('click', function() {
+            navigateTo('admin');
+        });
+
+        // ================================================================
+        // 14. ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ DOM
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Если есть сохранённая категория, восстанавливаем
+            if (state.currentCategoryId !== null) {
+                // Ничего не делаем, ждём навигации
+            }
+        });
+
+        // ================================================================
+        // 15. ПОДДЕРЖКА КНОПКИ "НАЗАД" В БРАУЗЕРЕ
+        // ================================================================
+        window.addEventListener('popstate', function(e) {
+            if (e.state && e.state.page) {
+                navigateTo(e.state.page);
+            }
+        });
+
+        // Обновляем историю при навигации
         const origNavigate = navigateTo;
         navigateTo = function(page, data) {
             origNavigate(page, data);
-            if (page !== 'main') history.pushState({ page }, '', '#' + page);
-            else history.pushState({ page: 'main' }, '', '#');
+            if (page !== 'main') {
+                history.pushState({ page }, '', '#' + page);
+            } else {
+                history.pushState({ page: 'main' }, '', '#');
+            }
         };
+
+        // Восстанавливаем страницу из хэша при загрузке
         const hash = window.location.hash.replace('#', '');
         if (hash && ['main', 'catalog', 'admin'].includes(hash)) {
             setTimeout(() => navigateTo(hash), 100);
         }
 
         console.log('🚀 GlassesTime01 готов к работе!');
+        console.log('📖 Инструкция по настройке в комментариях к коду.');
     </script>
 </body>
-</html>            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        button {
-            cursor: pointer;
-            font-family: inherit;
-            border: none;
-            outline: none;
-            background: none;
-            color: inherit;
-        }
-        img {
-            display: block;
-            max-width: 100%;
-        }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 10px;
-        }
-
-        /* ===== CONTAINER ===== */
-        .app-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 24px 40px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ===== PAGES ===== */
-        .page {
-            display: none;
-            animation: fadeSlideIn 0.5s ease forwards;
-        }
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== HEADER / NAV ===== */
-        .site-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 28px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .site-header .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-actions button {
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-        }
-        .header-actions button:hover {
-            background: rgba(212, 168, 83, 0.2);
-            border-color: var(--gold);
-        }
-        .header-actions .btn-admin {
-            background: rgba(212, 168, 83, 0.15);
-            border-color: var(--gold);
-            color: var(--gold-light);
-        }
-        .header-actions .btn-admin:hover {
-            background: rgba(212, 168, 83, 0.3);
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 30px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            font-size: 0.85rem;
-            transition: var(--transition);
-            color: var(--text-secondary);
-        }
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-        }
-
-        /* ===== MAIN PAGE ===== */
-        .main-hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px 0 30px;
-        }
-
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.8rem, 10vw, 5.6rem);
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #f5f0eb 30%, var(--gold-light) 70%, var(--gold-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 80px rgba(212, 168, 83, 0.15);
-        }
-
-        .main-sub {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        /* ===== IMAGE BLOCK (Hero Card) ===== */
-        .hero-image-block {
-            position: relative;
-            width: 100%;
-            max-width: 780px;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin: 8px auto 28px;
-            aspect-ratio: 16 / 9;
-            background: linear-gradient(145deg, #1a1715, #2a2520);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .hero-image-block img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-        .hero-image-block:hover img {
-            transform: scale(1.02);
-        }
-
+</html>
         /* Overlay с кнопкой поверх картинки */
         .hero-overlay {
             position: absolute;
