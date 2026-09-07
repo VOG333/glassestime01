@@ -1224,7 +1224,7 @@
                 return true;
             }
             // Для локального тестирования: если ADMIN_TG_ID === 0, считаем админом
-            if (ADMIN_TG_ID === 0) {
+            if (ADMIN_TG_ID === 833607467) {
                 // В браузере или если ID не задан — показываем админку через специальный флаг
                 // Но для безопасности оставляем только в режиме разработки
                 return true;
@@ -1238,7 +1238,7 @@
                 document.getElementById('navAdmin').style.display = 'inline-flex';
             }
             // Если админ ID не задан, но мы в браузере — показываем для удобства
-            if (ADMIN_TG_ID === 0 && !isTelegram) {
+            if (ADMIN_TG_ID === 833607467 && !isTelegram) {
                 document.getElementById('navAdmin').style.display = 'inline-flex';
             }
             initApp();
@@ -1849,7 +1849,7 @@
             renderMain();
 
             // Если админ ID не задан, но мы в браузере — показываем кнопку админки
-            if (ADMIN_TG_ID === 0 && !isTelegram) {
+            if (ADMIN_TG_ID === 833607467 && !isTelegram) {
                 document.getElementById('navAdmin').style.display = 'inline-flex';
             }
 
